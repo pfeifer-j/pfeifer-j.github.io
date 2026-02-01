@@ -50,9 +50,6 @@ button {
 }
 
 #noButton {
-  position: fixed; /* damit es über den gesamten Viewport springen kann */
-  top: auto;       /* Startwert wird per JS gesetzt */
-  left: auto;
   background-color: #f44336;
   color: white;
   border: none;
@@ -60,9 +57,15 @@ button {
   padding: 15px 30px;
   cursor: pointer;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  transition: transform 0.1s ease-out, top 0.1s ease-out, left 0.1s ease-out;
+  transition: transform 0.1s ease-out;
   z-index: 1000;
+  position: relative; /* Standard: bleibt im Container */
 }
+
+#noButton.fixed {
+  position: fixed; /* Sobald Maus kommt, springt es über Viewport */
+}
+
 
 
 #noButton:hover {
