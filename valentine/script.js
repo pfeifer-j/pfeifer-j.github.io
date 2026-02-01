@@ -2,6 +2,22 @@ const noButton = document.getElementById("noButton");
 const yesButton = document.getElementById("yesButton");
 const message = document.getElementById("message");
 
+// Setze Startposition neben "Ja"-Button
+function setInitialNoPosition() {
+  const rectYes = yesButton.getBoundingClientRect();
+  const btnWidth = noButton.offsetWidth;
+  const btnHeight = noButton.offsetHeight;
+
+  // rechts neben Ja-Button
+  const left = rectYes.right + 10; // 10px Abstand
+  const top = rectYes.top;          // gleiche Höhe wie Ja-Button
+
+  noButton.style.left = `${left}px`;
+  noButton.style.top = `${top}px`;
+}
+window.addEventListener("load", setInitialNoPosition);
+
+// Extrem springender Button
 function extremeNoButton(event) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
@@ -21,16 +37,14 @@ function extremeNoButton(event) {
   const distance = Math.sqrt(dx*dx + dy*dy);
 
   if (distance < 200) {
-    // Position random über gesamten Viewport
     const randomX = Math.random() * (viewportWidth - btnWidth);
     const randomY = Math.random() * (viewportHeight - btnHeight);
 
     noButton.style.left = `${randomX}px`;
     noButton.style.top = `${randomY}px`;
 
-    // Rotation + Scale für „lebendig“
-    const rotate = (Math.random() * 60) - 30; // -30° bis +30°
-    const scale = 0.8 + Math.random() * 0.6; // 0.8x bis 1.4x
+    const rotate = (Math.random() * 60) - 30;
+    const scale = 0.8 + Math.random() * 0.6;
     noButton.style.transform = `rotate(${rotate}deg) scale(${scale})`;
   }
 }
@@ -39,7 +53,7 @@ function extremeNoButton(event) {
 noButton.addEventListener("mousemove", extremeNoButton);
 noButton.addEventListener("touchstart", (e) => extremeNoButton(e.touches[0]));
 
-// Ja-Button Klick
+// "Ja"-Button Klick
 yesButton.addEventListener("click", () => {
   document.querySelector(".buttons").style.display = "none";
   message.style.display = "block";
