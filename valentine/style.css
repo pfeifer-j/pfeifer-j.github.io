@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #a0e7e5, #b4f8c8);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+h1 {
+  font-size: 2rem;
+  color: #ff6f61;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+#yesButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+#yesButton:hover {
+  background-color: #45a049;
+}
+
+#noButton {
+  background-color: #f44336;
+  color: white;
+  position: relative;
+}
+
+#noButton:hover {
+  background-color: #e53935;
+}
+
+#message {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  color: #ff6f61;
+  display: none;
+}
+
+.images {
+  margin-top: 20px;
+}
+
+.profile {
+  width: 100px;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+/* Floating emojis */
+.emoji {
+  position: absolute;
+  font-size: 2rem;
+  animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%,100% { transform: translate(0,0); }
+  25% { transform: translate(40px, -40px); }
+  50% { transform: translate(-40px, 40px); }
+  75% { transform: translate(40px, 40px); }
+}
+
+@keyframes explode {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(3); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  animation: confetti-fall 2s linear infinite;
+  border-radius: 50%;
+}
+
+@keyframes confetti-fall {
+  from { transform: translateY(-100vh) rotate(0deg); }
+  to { transform: translateY(100vh) rotate(360deg); }
+}
