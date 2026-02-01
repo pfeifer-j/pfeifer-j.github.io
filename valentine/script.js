@@ -4,12 +4,21 @@ const message = document.getElementById("message");
 
 // ---------------- Startposition von "Nein" neben "Ja" ----------------
 function setInitialNoPosition() {
-  const rectYes = yesButton.getBoundingClientRect();
+  // Relative Position zurücksetzen
   noButton.style.position = "absolute";
-  noButton.style.left = `${rectYes.right + 15}px`;
-  noButton.style.top = `${rectYes.top}px`;
+
+  // Hole die aktuelle Position vom Layout
+  const rectYes = yesButton.getBoundingClientRect();
+  const rectContainer = document.querySelector(".buttons").getBoundingClientRect();
+
+  // Position relativ zum Container
+  noButton.style.left = `${rectYes.right - rectContainer.left + 15}px`;
+  noButton.style.top = `${rectYes.top - rectContainer.top}px`;
 }
+
+// sicherstellen, dass die Funktion erst nach vollständigem Laden läuft
 window.addEventListener("load", setInitialNoPosition);
+
 
 // ---------------- Springender "Nein"-Button ----------------
 function moveNoButton(event) {
@@ -61,3 +70,4 @@ yesButton.addEventListener("click", () => {
   document.querySelector(".buttons").style.display = "none";
   message.style.display = "block";
 });
+

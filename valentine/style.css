@@ -30,6 +30,10 @@ h1 {
 /* ---------------- Buttons ---------------- */
 .buttons {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Abstand zwischen den Buttons */
+  position: relative; /* für absolute Position des "Nein"-Buttons später */
 }
 
 button {
@@ -52,7 +56,6 @@ button {
 #noButton {
   background-color: #ff3377;
   color: white;
-  position: relative;
   z-index: 1000;
   transition: transform 0.1s ease-out;
 }
