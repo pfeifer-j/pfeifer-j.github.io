@@ -2,15 +2,36 @@ const noButton = document.getElementById("noButton");
 const yesButton = document.getElementById("yesButton");
 const message = document.getElementById("message");
 
-// "Nein"-Button bewegt sich weg
-function moveNoButton() {
-  const x = Math.random() * 80 - 40;
-  const y = Math.random() * 80 - 40;
-  noButton.style.transform = `translate(${x}px, ${y}px)`;
+// "Nein"-Button bewegt sich weg extrem
+function moveNoButtonExtreme(event) {
+  const rect = noButton.getBoundingClientRect();
+  const btnX = rect.left + rect.width / 2;
+  const btnY = rect.top + rect.height / 2;
+
+  const cursorX = event.clientX;
+  const cursorY = event.clientY;
+
+  // Abstand zwischen Cursor und Button-Zentrum
+  const dx = btnX - cursorX;
+  const dy = btnY - cursorY;
+  const distance = Math.sqrt(dx*dx + dy*dy);
+
+  // Je näher der Cursor, desto stärker die Bewegung
+  const maxDistance = 200; // ab hier reagiert der Button
+  const intensity = Math.max(0, maxDistance - distance) / maxDistance;
+
+  // Extremere Bewegungsreichweite
+  const moveX = (Math.random() * 200 - 100) * intensity;
+  const moveY = (Math.random() * 200 - 100) * intensity;
+
+  noButton.style.transform = `translate(${moveX}px, ${moveY}px)`;
 }
 
-noButton.addEventListener("mouseover", moveNoButton);
-noButton.addEventListener("touchstart", moveNoButton);
+// Maus-Events
+noButton.addEventListener("mousemove", moveNoButtonExtreme);
+
+// Touch-Events für mobile
+noButton.addEventListener("touchstart", (e) => moveNoButtonExtreme(e.touches[0]));
 
 // "Ja"-Button Klick
 yesButton.addEventListener("click", () => {
