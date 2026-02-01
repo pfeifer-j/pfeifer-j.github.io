@@ -1,3 +1,4 @@
+/* ---------------- Body ---------------- */
 body {
   margin: 0;
   padding: 0;
@@ -5,110 +6,108 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #a0e7e5, #b4f8c8);
+  background: linear-gradient(to bottom, #ffdee9, #ffc1e3); /* Rosa Gradient */
   font-family: 'Comic Sans MS', cursive, sans-serif;
   overflow: hidden;
 }
 
+/* ---------------- Container ---------------- */
 .container {
   text-align: center;
   position: relative;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.2);
 }
 
+/* ---------------- Titel ---------------- */
 h1 {
-  font-size: 2rem;
-  color: #ff6f61;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #ff66a3;
+  margin-bottom: 25px;
+  line-height: 1.3;
 }
 
+/* ---------------- Buttons ---------------- */
 .buttons {
   margin-top: 20px;
 }
 
 button {
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  margin: 10px;
+  padding: 20px 40px;
+  font-size: 1.5rem;
+  margin: 15px;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   transition: transform 0.2s ease, background 0.2s ease;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
 
+/* Ja-Button */
 #yesButton {
-  background-color: #4caf50;
+  background-color: #ff69b4;
   color: white;
 }
+#yesButton:hover { background-color: #ff4da6; }
 
-#yesButton:hover {
-  background-color: #45a049;
-}
-
+/* Nein-Button */
 #noButton {
-  background-color: #f44336;
+  background-color: #ff3377;
   color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 15px 30px;
-  cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  transition: transform 0.1s ease-out;
+  position: relative; /* Start im Container */
   z-index: 1000;
-  position: relative; /* Standard: bleibt im Container */
+  transition: transform 0.1s ease-out;
 }
+#noButton.fixed { position: fixed; }
+#noButton:hover { background-color: #ff0055; }
 
-#noButton.fixed {
-  position: fixed; /* Sobald Maus kommt, springt es über Viewport */
-}
-
-
-
-#noButton:hover {
-  background-color: #e53935;
-}
-
+/* ---------------- Nachricht ---------------- */
 #message {
-  margin-top: 25px;
-  font-size: 1.3rem;
-  color: #ff6f61;
+  margin-top: 30px;
+  font-size: 1.5rem;
+  color: #ff66a3;
   display: none;
 }
 
+/* ---------------- Bilder ---------------- */
 .images {
-  margin-top: 20px;
+  margin-top: 25px;
 }
-
 .profile {
-  width: 100px;
+  width: 150px; /* größer */
   border-radius: 50%;
-  margin: 10px;
+  margin: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
 }
+.profile:hover { transform: scale(1.1); }
 
-/* Floating emojis */
+/* ---------------- Emojis ---------------- */
 .emoji {
   position: absolute;
-  font-size: 2rem;
-  animation: float 6s infinite ease-in-out;
+  font-size: calc(1.5rem + 2 * var(--size)); /* variierende Größe */
+  animation: float calc(4s + 3 * var(--speed)) infinite ease-in-out;
+  color: var(--color, #ff66a3);
 }
 
+/* Schwimmende Bewegung */
 @keyframes float {
-  0%,100% { transform: translate(0,0); }
-  25% { transform: translate(40px, -40px); }
-  50% { transform: translate(-40px, 40px); }
-  75% { transform: translate(40px, 40px); }
+  0%   { transform: translate(0,0) rotate(0deg); }
+  25%  { transform: translate(var(--x1,20px), var(--y1,-20px)) rotate(15deg); }
+  50%  { transform: translate(var(--x2,-20px), var(--y2,20px)) rotate(-15deg); }
+  75%  { transform: translate(var(--x3,30px), var(--y3,10px)) rotate(10deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
 }
 
+/* Explosions-Animation für Emojis */
 @keyframes explode {
   from { transform: scale(1); opacity: 1; }
   to { transform: scale(3); opacity: 0; }
 }
 
-/* Confetti */
+/* ---------------- Confetti ---------------- */
 .confetti {
   position: fixed;
   width: 10px;
