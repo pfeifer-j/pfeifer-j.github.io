@@ -2,47 +2,46 @@ const noButton = document.getElementById("noButton");
 const yesButton = document.getElementById("yesButton");
 const message = document.getElementById("message");
 
-// "Nein"-Button springt über den gesamten Viewport
-function jumpNoButton(event) {
+// Extrem springender, rotierender und wackelnder Button
+function extremeNoButton(event) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  // Button-Größe
   const btnWidth = noButton.offsetWidth;
   const btnHeight = noButton.offsetHeight;
 
-  // Cursor Position
-  const cursorX = event.clientX;
-  const cursorY = event.clientY;
-
-  // Button-Zentrum
   const rect = noButton.getBoundingClientRect();
   const btnX = rect.left + btnWidth / 2;
   const btnY = rect.top + btnHeight / 2;
 
-  // Abstand Cursor <-> Button
+  const cursorX = event.clientX;
+  const cursorY = event.clientY;
+
   const dx = btnX - cursorX;
   const dy = btnY - cursorY;
   const distance = Math.sqrt(dx*dx + dy*dy);
 
-  // Wenn der Cursor zu nah ist, springe
-  if (distance < 150) {
-    const maxX = viewportWidth - btnWidth - 20;
-    const maxY = viewportHeight - btnHeight - 20;
+  // Je näher der Cursor, desto extremer
+  if (distance < 200) {
+    const randomX = Math.random() * (viewportWidth - btnWidth);
+    const randomY = Math.random() * (viewportHeight - btnHeight);
 
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-
+    // Springen
     noButton.style.left = `${randomX}px`;
     noButton.style.top = `${randomY}px`;
+
+    // Rotation und Skalierung für verrückten Effekt
+    const rotate = (Math.random() * 60) - 30; // -30° bis +30°
+    const scale = 0.8 + Math.random() * 0.6; // 0.8x bis 1.4x
+    noButton.style.transform = `translate(0,0) rotate(${rotate}deg) scale(${scale})`;
   }
 }
 
-// Maus & Touch Events
-noButton.addEventListener("mousemove", jumpNoButton);
-noButton.addEventListener("touchstart", (e) => jumpNoButton(e.touches[0]));
+// Mouse + Touch
+noButton.addEventListener("mousemove", extremeNoButton);
+noButton.addEventListener("touchstart", (e) => extremeNoButton(e.touches[0]));
 
-// "Ja"-Button Klick
+// "Ja"-Button Klick bleibt gleich
 yesButton.addEventListener("click", () => {
   document.querySelector(".buttons").style.display = "none";
   message.style.display = "block";
