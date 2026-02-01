@@ -50,10 +50,20 @@ button {
 }
 
 #noButton {
+  position: fixed; /* <-- fixiert relativ zum viewport */
+  top: auto;
+  left: auto;
   background-color: #f44336;
   color: white;
-  position: relative;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transition: none; /* Sofort springen */
+  z-index: 1000; /* Über allen anderen Elementen */
 }
+
 
 #noButton:hover {
   background-color: #e53935;

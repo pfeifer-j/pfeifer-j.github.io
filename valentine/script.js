@@ -2,46 +2,47 @@ const noButton = document.getElementById("noButton");
 const yesButton = document.getElementById("yesButton");
 const message = document.getElementById("message");
 
-// "Nein"-Button springt random über die ganze Website
+// "Nein"-Button springt über den gesamten Viewport
 function jumpNoButton(event) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  // Berechne Button-Größe
-  const rect = noButton.getBoundingClientRect();
-  const btnWidth = rect.width;
-  const btnHeight = rect.height;
+  // Button-Größe
+  const btnWidth = noButton.offsetWidth;
+  const btnHeight = noButton.offsetHeight;
 
   // Cursor Position
   const cursorX = event.clientX;
   const cursorY = event.clientY;
 
   // Button-Zentrum
-  const btnX = rect.left + rect.width / 2;
-  const btnY = rect.top + rect.height / 2;
+  const rect = noButton.getBoundingClientRect();
+  const btnX = rect.left + btnWidth / 2;
+  const btnY = rect.top + btnHeight / 2;
 
   // Abstand Cursor <-> Button
   const dx = btnX - cursorX;
   const dy = btnY - cursorY;
   const distance = Math.sqrt(dx*dx + dy*dy);
 
-  // Wenn der Cursor zu nah ist (<150px), springe
+  // Wenn der Cursor zu nah ist, springe
   if (distance < 150) {
-    const maxX = viewportWidth - btnWidth - 20; // Padding
+    const maxX = viewportWidth - btnWidth - 20;
     const maxY = viewportHeight - btnHeight - 20;
 
     const randomX = Math.random() * maxX;
     const randomY = Math.random() * maxY;
 
-    noButton.style.transform = `translate(${randomX - rect.left}px, ${randomY - rect.top}px)`;
+    noButton.style.left = `${randomX}px`;
+    noButton.style.top = `${randomY}px`;
   }
 }
 
-// Events
+// Maus & Touch Events
 noButton.addEventListener("mousemove", jumpNoButton);
 noButton.addEventListener("touchstart", (e) => jumpNoButton(e.touches[0]));
 
-// "Ja"-Button Klick bleibt gleich
+// "Ja"-Button Klick
 yesButton.addEventListener("click", () => {
   document.querySelector(".buttons").style.display = "none";
   message.style.display = "block";
