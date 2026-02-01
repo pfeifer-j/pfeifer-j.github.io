@@ -1,8 +1,8 @@
-# Marlene, will You Be My Valentine? 🌹
+# Marlene, willst du meine Valentinskarte sein? 🌹
 
-This is a small website I made to ask you a very important question…  
+Dies ist eine kleine Website, die ich erstellt habe, um dir eine sehr wichtige Frage zu stellen:
 
-> Will you be my Valentine? 💖
+> Willst du mein Valentin sein? 💖
 >
 
-[silbador.de/valentine][silbador.de/valentine]
+[silbador.de/valentine](https://silbador.de/valentine)
