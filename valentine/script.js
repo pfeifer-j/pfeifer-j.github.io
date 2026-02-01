@@ -2,48 +2,54 @@ const noButton = document.getElementById("noButton");
 const yesButton = document.getElementById("yesButton");
 const message = document.getElementById("message");
 
-// "Nein"-Button bewegt sich weg extrem
-function moveNoButtonExtreme(event) {
-  const rect = noButton.getBoundingClientRect();
-  const btnX = rect.left + rect.width / 2;
-  const btnY = rect.top + rect.height / 2;
+// "Nein"-Button springt random über die ganze Website
+function jumpNoButton(event) {
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
 
+  // Berechne Button-Größe
+  const rect = noButton.getBoundingClientRect();
+  const btnWidth = rect.width;
+  const btnHeight = rect.height;
+
+  // Cursor Position
   const cursorX = event.clientX;
   const cursorY = event.clientY;
 
-  // Abstand zwischen Cursor und Button-Zentrum
+  // Button-Zentrum
+  const btnX = rect.left + rect.width / 2;
+  const btnY = rect.top + rect.height / 2;
+
+  // Abstand Cursor <-> Button
   const dx = btnX - cursorX;
   const dy = btnY - cursorY;
   const distance = Math.sqrt(dx*dx + dy*dy);
 
-  // Je näher der Cursor, desto stärker die Bewegung
-  const maxDistance = 200; // ab hier reagiert der Button
-  const intensity = Math.max(0, maxDistance - distance) / maxDistance;
+  // Wenn der Cursor zu nah ist (<150px), springe
+  if (distance < 150) {
+    const maxX = viewportWidth - btnWidth - 20; // Padding
+    const maxY = viewportHeight - btnHeight - 20;
 
-  // Extremere Bewegungsreichweite
-  const moveX = (Math.random() * 200 - 100) * intensity;
-  const moveY = (Math.random() * 200 - 100) * intensity;
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
-  noButton.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    noButton.style.transform = `translate(${randomX - rect.left}px, ${randomY - rect.top}px)`;
+  }
 }
 
-// Maus-Events
-noButton.addEventListener("mousemove", moveNoButtonExtreme);
+// Events
+noButton.addEventListener("mousemove", jumpNoButton);
+noButton.addEventListener("touchstart", (e) => jumpNoButton(e.touches[0]));
 
-// Touch-Events für mobile
-noButton.addEventListener("touchstart", (e) => moveNoButtonExtreme(e.touches[0]));
-
-// "Ja"-Button Klick
+// "Ja"-Button Klick bleibt gleich
 yesButton.addEventListener("click", () => {
   document.querySelector(".buttons").style.display = "none";
   message.style.display = "block";
 
-  // Emojis explodieren
   document.querySelectorAll(".emoji").forEach(emoji => {
     emoji.style.animation = "explode 1s forwards";
   });
 
-  // Confetti hinzufügen
   for (let i = 0; i < 50; i++) {
     const confetti = document.createElement("div");
     confetti.className = "confetti";
