@@ -1,4 +1,4 @@
-# Marlene, willst du meine Valentinskarte sein? 🌹
+# Marlene, do you want to be my Valentine? 🌹
 
 Dies ist eine kleine Website, die ich erstellt habe, um dir eine sehr wichtige Frage zu stellen:
 
