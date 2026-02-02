@@ -1,83 +1,171 @@
-/* ---------------- Body ---------------- */
-body {
+* {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #ffdee9, #ffc1e3);
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  overflow: hidden;
+  background: linear-gradient(135deg, #ffd4e5 0%, #ffb3d9 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  padding: 20px;
 }
 
-/* ---------------- Container ---------------- */
-.container {
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 60px 40px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
   text-align: center;
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 30px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.2);
 }
 
-/* ---------------- Titel ---------------- */
-h1 {
-  font-size: 2.5rem;
-  color: #ff66a3;
-  margin-bottom: 25px;
-}
-
-/* ---------------- Buttons ---------------- */
-.buttons {
-  margin-top: 20px;
+/* Images Section */
+.images {
   display: flex;
   justify-content: center;
-  gap: 15px; /* Abstand zwischen den Buttons */
-  position: relative; /* für absolute Position des "Nein"-Buttons später */
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffb3d9;
+  transition: transform 0.3s ease;
+}
+
+.profile:hover {
+  transform: scale(1.05);
+}
+
+.heart {
+  font-size: 32px;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Title */
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ff69b4;
+  margin-bottom: 40px;
+  line-height: 1.4;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  position: relative;
+  min-height: 60px;
 }
 
 button {
-  padding: 20px 40px;
-  font-size: 1.5rem;
-  margin: 15px;
+  padding: 16px 40px;
+  font-size: 18px;
+  font-weight: 600;
   border: none;
-  border-radius: 15px;
+  border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 #yesButton {
-  background-color: #ff69b4;
+  background: #ff69b4;
   color: white;
 }
-#yesButton:hover { background-color: #ff4da6; }
+
+#yesButton:hover {
+  background: #ff1493;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+}
+
+#yesButton:active {
+  transform: translateY(0);
+}
 
 #noButton {
-  background-color: #ff3377;
-  color: white;
-  z-index: 1000;
-  transition: transform 0.1s ease-out;
+  background: #fff;
+  color: #ff69b4;
+  border: 2px solid #ff69b4;
+  position: absolute;
+  transition: all 0.2s ease;
 }
-#noButton:hover { background-color: #ff0055; }
 
-/* ---------------- Nachricht ---------------- */
+#noButton:hover {
+  background: #fff5f8;
+}
+
+/* Message */
 #message {
-  margin-top: 30px;
-  font-size: 1.5rem;
-  color: #ff66a3;
-  display: none;
+  margin-top: 40px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
-/* ---------------- Bilder ---------------- */
-.images {
-  margin-top: 25px;
+#message.hidden {
+  display: none;
+  opacity: 0;
 }
-.profile {
-  width: 150px;
-  border-radius: 50%;
-  margin: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
+
+#message p {
+  font-size: 24px;
+  color: #ff69b4;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
-.profile:hover { transform: scale(1.1); }
+
+#message .subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #ff8dc7;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .card {
+    padding: 40px 24px;
+  }
+  
+  h1 {
+    font-size: 22px;
+  }
+  
+  .profile {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .heart {
+    font-size: 24px;
+  }
+  
+  button {
+    padding: 14px 32px;
+    font-size: 16px;
+  }
+  
+  #message p {
+    font-size: 20px;
+  }
+  
+  #message .subtitle {
+    font-size: 16px;
+  }
+}

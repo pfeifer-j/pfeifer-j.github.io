@@ -3,31 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marlene, willst du meine Valentine sein?</title>
+  <title>Marlene ❤️</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Titel -->
+  <div class="card">
+    <div class="images">
+      <img src="jan.jpg" alt="Jan" class="profile">
+      <div class="heart">❤️</div>
+      <img src="marlene.jpg" alt="Marlene" class="profile">
+    </div>
+    
     <h1>Marlene, willst du meine Valentine sein?</h1>
-
-    <!-- Buttons -->
+    
     <div class="buttons">
       <button id="yesButton">Ja</button>
       <button id="noButton">Nein</button>
     </div>
 
-    <!-- Nachricht nach Klick auf "Ja" -->
-    <div id="message">
-      Ich wusste, dass du Ja sagen würdest, Marlene!<br>
-      Ich kann es kaum erwarten, dich zu sehen ✨
-    </div>
-
-    <!-- Bilder von euch -->
-    <div class="images">
-      <img src="jan.jpg" alt="Jan" class="profile">
-      <img src="marlene.jpg" alt="Marlene" class="profile">
+    <div id="message" class="hidden">
+      <p>Ich wusste, dass du Ja sagen würdest! ✨</p>
+      <p class="subtitle">Ich kann es kaum erwarten, dich zu sehen</p>
     </div>
   </div>
 
