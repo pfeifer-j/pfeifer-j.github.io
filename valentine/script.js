@@ -43,10 +43,50 @@ function moveNoButton(event) {
   }
 }
 
+// Create emoji rain effect
+function createEmojiRain() {
+  const emojis = ['🌸', '🌺', '💕', '✨', '🌹', '💖'];
+  
+  for (let i = 0; i < 80; i++) {
+    setTimeout(() => {
+      const emoji = document.createElement('div');
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.position = 'fixed';
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.top = '-50px';
+      emoji.style.fontSize = (20 + Math.random() * 20) + 'px';
+      emoji.style.opacity = '0.8';
+      emoji.style.pointerEvents = 'none';
+      emoji.style.zIndex = '9999';
+      
+      document.body.appendChild(emoji);
+      
+      // Animate falling
+      let pos = -50;
+      const speed = 2 + Math.random() * 3;
+      const drift = (Math.random() - 0.5) * 2;
+      let currentLeft = parseFloat(emoji.style.left);
+      
+      const fall = setInterval(() => {
+        pos += speed;
+        currentLeft += drift * 0.1;
+        emoji.style.top = pos + 'px';
+        emoji.style.left = currentLeft + 'vw';
+        
+        if (pos > window.innerHeight) {
+          clearInterval(fall);
+          emoji.remove();
+        }
+      }, 20);
+    }, i * 50);
+  }
+}
+
 // Handle "Yes" button click
 yesButton.addEventListener('click', () => {
   noButton.classList.add('hidden');
   message.classList.remove('hidden');
+  createEmojiRain();
 });
 
 // Handle "No" button hover/touch
