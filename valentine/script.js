@@ -3,25 +3,17 @@ const noButton = document.getElementById('noButton');
 const message = document.getElementById('message');
 const buttons = document.querySelector('.buttons');
 
-// Track if "No" button has been moved
-let noButtonMoved = false;
-
-// Initialize "No" button position
+// Position "No" button next to "Yes" button initially
 function initNoButton() {
-  const buttonsRect = buttons.getBoundingClientRect();
   const yesRect = yesButton.getBoundingClientRect();
   
-  noButton.style.left = `${yesRect.right - buttonsRect.left + 20}px`;
-  noButton.style.top = '0px';
+  // Position No button to the right of Yes button
+  noButton.style.left = `${yesRect.right + 20}px`;
+  noButton.style.top = `${yesRect.top + (yesRect.height - noButton.offsetHeight) / 2}px`;
 }
 
-// Move "No" button away from cursor
+// Move "No" button to random position on viewport
 function moveNoButton(event) {
-  if (!noButtonMoved) {
-    noButtonMoved = true;
-  }
-  
-  const buttonsRect = buttons.getBoundingClientRect();
   const noRect = noButton.getBoundingClientRect();
   
   // Get cursor position
@@ -36,15 +28,15 @@ function moveNoButton(event) {
   const dy = buttonCenterY - cursorY;
   const distance = Math.sqrt(dx * dx + dy * dy);
   
-  // If cursor is close, move the button
-  if (distance < 100) {
-    // Calculate available space
-    const maxX = buttonsRect.width - noButton.offsetWidth;
-    const maxY = 100; // Keep it within reasonable bounds
+  // If cursor is close, move the button to random position
+  if (distance < 120) {
+    const padding = 20;
+    const maxX = window.innerWidth - noButton.offsetWidth - padding;
+    const maxY = window.innerHeight - noButton.offsetHeight - padding;
     
-    // Generate random position
-    const newX = Math.random() * maxX;
-    const newY = (Math.random() - 0.5) * maxY;
+    // Generate random position anywhere on screen
+    const newX = padding + Math.random() * (maxX - padding);
+    const newY = padding + Math.random() * (maxY - padding);
     
     noButton.style.left = `${newX}px`;
     noButton.style.top = `${newY}px`;
@@ -53,7 +45,7 @@ function moveNoButton(event) {
 
 // Handle "Yes" button click
 yesButton.addEventListener('click', () => {
-  buttons.style.display = 'none';
+  noButton.classList.add('hidden');
   message.classList.remove('hidden');
 });
 
@@ -64,11 +56,15 @@ noButton.addEventListener('touchstart', (e) => {
   e.preventDefault();
   moveNoButton(e);
 });
+noButton.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  moveNoButton(e);
+});
 
 // Initialize on load
-window.addEventListener('load', initNoButton);
-window.addEventListener('resize', () => {
-  if (!noButtonMoved) {
-    initNoButton();
-  }
+window.addEventListener('load', () => {
+  // Small delay to ensure layout is ready
+  setTimeout(initNoButton, 100);
 });
+
+window.addEventListener('resize', initNoButton);
